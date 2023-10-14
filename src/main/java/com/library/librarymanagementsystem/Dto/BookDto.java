@@ -18,6 +18,6 @@ public class BookDto {
     private String author ;
     @NotBlank(message = "book isbn can't be empty")
     private String isbn ;
-    @Min(0)
-    private float price ;
+    @NotBlank(message = "book isbn can't be empty")
+    private String category ;
 }
