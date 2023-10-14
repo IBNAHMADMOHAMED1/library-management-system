@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final AuthService authService;
-
-
     public UserController(AuthService authService) {
         this.authService = authService;
     }
@@ -28,6 +26,6 @@ public class UserController {
             return ResponseEntity.badRequest().body(APIResponse.builder().status("error").status("Invalid username or password").build());
         }
         return ResponseEntity.ok(APIResponse.builder().status("success").result(token).build());
-
     }
+
 }
