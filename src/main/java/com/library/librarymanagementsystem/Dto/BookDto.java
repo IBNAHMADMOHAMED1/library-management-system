@@ -20,4 +20,5 @@ public class BookDto {
     private String isbn ;
     @NotBlank(message = "book isbn can't be empty")
     private String category ;
+    private String status ;
 }
