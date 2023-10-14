@@ -5,27 +5,31 @@ import com.library.librarymanagementsystem.Entity.Book;
 import com.library.librarymanagementsystem.Exception.BookAlreadyExistsException;
 import com.library.librarymanagementsystem.Mapper.BookMapper;
 import com.library.librarymanagementsystem.Repository.BookRepository;
+import com.library.librarymanagementsystem.Service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class BookServiceImpl {
+public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
-    public BookDto addBook(BookDto bookDto) {
+    @Override
+    public BookDto addBook(@Valid BookDto bookDto) {
         // TODO: validate user type and throw exception if not admin
-        /*if (!bookDto.isValid()) {
-            throw new RuntimeException("Book cannot be null");
-        }
-        bookRepository.findById(bookDto.getId()).ifPresent(book -> {
+        if (isExist(bookDto.getIsbn())) {
             throw new BookAlreadyExistsException();
-        });*/
+        }
         Book book = bookRepository.save(bookMapper.toBook(bookDto));
         return bookMapper.toDto(book);
     }
 
 
+
+    private boolean isExist(String isbn) {
+        return bookRepository.findByIsbn(isbn).isPresent();
+    }
 }
