@@ -23,10 +23,11 @@ public class BookTransaction {
     @JoinColumn(name = "book_id")
     private Book book ;
 
-    @Temporal(TemporalType.DATE)
-    @Column(columnDefinition = "DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date borrowingDate ;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date returnDate ;
 
     @Enumerated
