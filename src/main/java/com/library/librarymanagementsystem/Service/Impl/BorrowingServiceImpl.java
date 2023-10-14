@@ -27,7 +27,7 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public BookDto borrowBook(Long bookId, Long memberId) throws BookNotFoundException, CanNotProcessBorrowingException {
-        if (!bookRepository.existsById(bookId)) throw new BookNotFoundException("cannot find book with id "+bookId);
+        if (!bookRepository.existsById(bookId) || bookRepository.isAvailable(bookId)) throw new BookNotFoundException("book with id "+bookId+ " not exist or un available");
         else if (!canBorrowBook(bookId,memberId)) throw  new CanNotProcessBorrowingException("can't borrow this book exceeted limit");
         BookTransaction newTransaction = BookTransaction.builder()
                 .book(bookRepository.findById(bookId).get())
