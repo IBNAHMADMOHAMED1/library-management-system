@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookTransactionRepository extends JpaRepository<BookTransaction,Long> {
 
-    @Query(value = "select count(id) from book_transactions where borrower_id =:memberId",nativeQuery = true)
+    @Query(value = "select count(id) from book_transactions where borrower_id =:memberId and status='BORROWED'" ,nativeQuery = true)
     Long countAllByUser(Long memberId);
 }
+m
