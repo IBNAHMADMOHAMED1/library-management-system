@@ -15,15 +15,13 @@ public class JwtUtil {
 
     @Value("${jwt.supper.secret}")
     private  String secKey;
-    @Value("${jwt.expiration.time}")
-    private String expirationTime;
     public String generateToken(UserDto userDto) {
         return Jwts.builder()
                 .setSubject(userDto.getUsername())
                 .claim("role", userDto.getRole())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + secKey))
-                .signWith(SignatureAlgorithm.HS256, expirationTime)
+                .setExpiration(new Date(System.currentTimeMillis() + 864000000))
+                .signWith(SignatureAlgorithm.HS256,"eyJhbGciOiJIUzI1NiJ9bPRexbsTiVN2m3OTM8SuHGvbzPYnVM6MUcF9kksOM")
                 .compact();
     }
 
