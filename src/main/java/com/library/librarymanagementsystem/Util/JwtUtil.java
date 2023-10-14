@@ -13,16 +13,16 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.supper.secret}")
-    private  String secKey;
+    private  String secKey = "eyJhbGciOiJIUzI1NiJ9bPRexbsTiVN2m3OTM8SuHGvbzPYnVM6MUcF9kksOM";
     public String generateToken(UserDto userDto) {
         return Jwts.builder()
                 .setSubject(userDto.getUsername())
                 .claim("role", userDto.getRole())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 864000000))
-                .signWith(SignatureAlgorithm.HS256,"eyJhbGciOiJIUzI1NiJ9bPRexbsTiVN2m3OTM8SuHGvbzPYnVM6MUcF9kksOM")
+                .signWith(SignatureAlgorithm.HS256, secKey)
                 .compact();
     }
+
 
 }
