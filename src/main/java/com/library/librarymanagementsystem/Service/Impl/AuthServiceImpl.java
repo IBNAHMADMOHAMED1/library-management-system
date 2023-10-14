@@ -22,6 +22,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String login(LoginRequestDto loginRequest) {
         Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
-        return user.map(value -> jwtUtil.generateToken(userMapper.userToUserDto(value))).orElse(null);
+        if (user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword())) {
+            return jwtUtil.generateToken(userMapper.userToUserDto(user.get()));
+        }
+        return null;
     }
 }
