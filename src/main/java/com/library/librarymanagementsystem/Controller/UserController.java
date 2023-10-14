@@ -4,6 +4,7 @@ import com.library.librarymanagementsystem.Dto.APIResponse;
 import com.library.librarymanagementsystem.Dto.ErrorDto;
 import com.library.librarymanagementsystem.Dto.LoginRequestDto;
 import com.library.librarymanagementsystem.Service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<APIResponse<?>> login(@RequestBody LoginRequestDto loginRequest) {
+    public ResponseEntity<APIResponse<?>> login(@RequestBody @Valid LoginRequestDto loginRequest) {
         String token = authService.login(loginRequest);
         if (token == null) {
             ErrorDto.builder().field("username").message("Invalid username or password").build();
