@@ -30,6 +30,6 @@ public class BookTransaction {
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date returnDate ;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private BookTransactionStatus status;
 }
