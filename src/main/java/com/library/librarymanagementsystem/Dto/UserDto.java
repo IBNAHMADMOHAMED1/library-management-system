@@ -1,5 +1,6 @@
 package com.library.librarymanagementsystem.Dto;
 
+import com.library.librarymanagementsystem.Enum.ROLE;
 import lombok.*;
 
 @Builder
@@ -11,5 +12,5 @@ public class UserDto {
     private String username;
     private String password;
     private String email;
-    private String role;
+    private ROLE role;
 }
