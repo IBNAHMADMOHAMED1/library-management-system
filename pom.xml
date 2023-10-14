@@ -56,11 +56,13 @@
             <artifactId>mapstruct</artifactId>
             <version>1.4.2.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.2</version>
+            <artifactId>jjwt</artifactId>
+            <version>0.12.2</version>
         </dependency>
+
     </dependencies>
 
     <build>
