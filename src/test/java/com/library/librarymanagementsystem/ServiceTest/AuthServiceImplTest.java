@@ -46,12 +46,5 @@ public class AuthServiceImplTest {
         when(jwtUtil.generateToken(Mockito.any())).thenReturn("token");
         String token = authService.login(loginRequest);
         assertEquals("token", token);
-
-
-    }
-
-    @Test
-    void testLoginUserNotFound() {
-
     }
 }
