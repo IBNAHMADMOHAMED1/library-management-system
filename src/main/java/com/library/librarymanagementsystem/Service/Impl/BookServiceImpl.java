@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class BookServiceImpl {
 
     private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
+  //  private final BookMapper bookMapper;
 
     public BookDto addBook(BookDto bookDto) {
         // TODO: validate user type and throw exception if not admin
@@ -23,8 +23,8 @@ public class BookServiceImpl {
         bookRepository.findById(bookDto.getId()).ifPresent(book -> {
             throw new BookAlreadyExistsException();
         });*/
-        Book book = bookRepository.save(bookMapper.toBook(bookDto));
-        return bookMapper.toDto(book);
+       // Book book = bookRepository.save(bookMapper.toBook(bookDto));
+        return null;
     }
 
 

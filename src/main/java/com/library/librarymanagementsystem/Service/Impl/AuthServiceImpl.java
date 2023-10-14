@@ -6,22 +6,18 @@ import com.library.librarymanagementsystem.Mapper.UserMapper;
 import com.library.librarymanagementsystem.Repository.UserRepository;
 import com.library.librarymanagementsystem.Service.AuthService;
 import com.library.librarymanagementsystem.Util.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final UserMapper userMapper;
-
-    public AuthServiceImpl(UserRepository userRepository, JwtUtil jwtUtil, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.jwtUtil = jwtUtil;
-        this.userMapper = userMapper;
-    }
 
     @Override
     public String login(LoginRequestDto loginRequest) {
