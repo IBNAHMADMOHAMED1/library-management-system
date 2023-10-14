@@ -6,6 +6,7 @@ import com.library.librarymanagementsystem.Dto.LoginRequestDto;
 import com.library.librarymanagementsystem.Service.Impl.AuthServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,6 +23,7 @@ class UserControllerTest {
     @Mock
     private AuthServiceImpl authService;
 
+    @InjectMocks
     private UserController userController;
 
     @BeforeEach
