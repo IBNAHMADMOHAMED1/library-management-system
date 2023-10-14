@@ -7,6 +7,9 @@ import com.library.librarymanagementsystem.Dto.ErrorDto;
 import com.library.librarymanagementsystem.Exception.BookNotFoundException;
 import com.library.librarymanagementsystem.Exception.CanNotProcessBorrowingException;
 import com.library.librarymanagementsystem.Service.BorrowingService;
+import com.library.librarymanagementsystem.Service.Impl.BookTransactionServiceImpl;
+import com.library.librarymanagementsystem.Util.JwtUtil;
+import com.library.librarymanagementsystem.filter.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import java.util.List;
 public class BorrowingController {
 
     private final BorrowingService borrowingService ;
+    private final BookTransactionServiceImpl bookTransactionService;
 
     @PostMapping("/{id}/borrow")
     public ResponseEntity<APIResponse<?>> borrowBook(@PathVariable Long id){
@@ -66,5 +70,15 @@ public class BorrowingController {
                 .result(bookDto)
                         .status("sucess")
                 .build());
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<APIResponse<?>> getHistory(@RequestParam int page, @RequestParam int size){
+        return ResponseEntity.ok(
+                APIResponse.builder()
+                        .status("success")
+                        .result(bookTransactionService.getHistory(page,size))
+                        .build()
+        );
     }
 }

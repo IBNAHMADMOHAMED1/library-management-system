@@ -1,13 +1,15 @@
 package com.library.librarymanagementsystem.Dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class LoginRequestDto {
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 }
