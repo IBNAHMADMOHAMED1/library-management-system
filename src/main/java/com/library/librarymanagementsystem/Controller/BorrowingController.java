@@ -56,8 +56,20 @@ public class BorrowingController {
 
     @PostMapping("/{id}/return")
     public ResponseEntity<APIResponse<?>> returnBook(@PathVariable Long id){
-        borrowingService.returnBook(id,1L);
-        return ResponseEntity.ok().build();
+        BookDto bookDto =null;
+        try {
+            bookDto = borrowingService.returnBook(id, 1L);
+
+        } catch (BookNotFoundException e) {
+            ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(APIResponse.builder()
+                    .errors(List.of(ErrorDto.builder().message(e.getMessage()).build())));
+        }
+        return ResponseEntity.ok(APIResponse.builder()
+                .result(bookDto)
+                        .status("sucess")
+                .build());
     }
 
     @GetMapping("/history")

@@ -2,6 +2,7 @@ package com.library.librarymanagementsystem.Service.Impl;
 
 import com.library.librarymanagementsystem.Dto.BookDto;
 import com.library.librarymanagementsystem.Entity.BookTransaction;
+import com.library.librarymanagementsystem.Enum.BookTransactionStatus;
 import com.library.librarymanagementsystem.Exception.BookNotFoundException;
 import com.library.librarymanagementsystem.Exception.CanNotProcessBorrowingException;
 import com.library.librarymanagementsystem.Mapper.BookMapper;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -39,8 +41,14 @@ public class BorrowingServiceImpl implements BorrowingService {
     }
 
     @Override
-    public BookDto returnBook(Long bookId, Long memberId) {
-        return null;
+    public BookDto returnBook(Long bookId, Long memberId) throws BookNotFoundException {
+        if (!bookRepository.existsById(bookId)) throw new BookNotFoundException("book with id "+bookId+ " not exist");
+        else if(bookTransactionRepository.existsByBook_IdAnAndBorrower_Id(bookId,memberId)) throw new BookNotFoundException("this book is not borrowed to return it !");
+        BookTransaction transaction = bookTransactionRepository.findByBook_IdAndAndBorrower_Id(bookId, memberId).get();
+        transaction.setStatus(BookTransactionStatus.AVAILABLE);
+        return bookMapper.toDto(transaction.getBook());
+
+
     }
 
     @Override
