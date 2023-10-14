@@ -3,11 +3,17 @@ package com.library.librarymanagementsystem.Entity;
 
 import com.library.librarymanagementsystem.Enum.BookTransactionStatus;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Table(name = "book_transactions")
 @Entity
+@Setter
+@Getter
+@Builder
 public class BookTransaction {
 
     @Id
@@ -30,6 +36,6 @@ public class BookTransaction {
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date returnDate ;
 
-    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('BORROWED','RETURNED','OVERDUE') DEFAULT 'BORROWED' ",name = "status",nullable = false)
     private BookTransactionStatus status;
 }
