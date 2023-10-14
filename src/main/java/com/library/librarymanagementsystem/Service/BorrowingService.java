@@ -6,6 +6,6 @@ import com.library.librarymanagementsystem.Exception.CanNotProcessBorrowingExcep
 
 public interface BorrowingService {
     public BookDto borrowBook(Long bookId,Long memberId) throws BookNotFoundException, CanNotProcessBorrowingException;
-    public BookDto returnBook(Long bookId,Long memberId);
+    public BookDto returnBook(Long bookId,Long memberId) throws BookNotFoundException;
     public boolean canBorrowBook(Long bookId,Long memberId);
 }
