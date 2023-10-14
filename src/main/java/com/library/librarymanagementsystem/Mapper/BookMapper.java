@@ -15,6 +15,7 @@ public class BookMapper {
                 .isbn(book.getIsbn())
                 .title(book.getTitle())
                 .category(book.getCategory().getName())
+                .status(book.getStatus().name())
                 .build();
     }
    public  Book toBook(BookDto bookDto){
