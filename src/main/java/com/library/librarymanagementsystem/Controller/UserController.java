@@ -22,6 +22,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<APIResponse<?>> login(@RequestBody @Valid LoginRequestDto loginRequest) {
         String token = authService.login(loginRequest);
+        System.out.println("token: " + token);
         if (token == null) {
             ErrorDto.builder().field("username").message("Invalid username or password").build();
             return ResponseEntity.badRequest().body(APIResponse.builder().status("error").status("Invalid username or password").build());

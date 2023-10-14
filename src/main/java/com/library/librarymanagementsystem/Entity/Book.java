@@ -23,4 +23,13 @@ public class Book {
     private Category category;
     private BookStatus status;
     private int quantity;
+
+    public Book(String title, String author, String isbn, Category category, BookStatus status, int quantity) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.category = category;
+        this.status = status;
+        this.quantity = quantity;
+    }
 }
