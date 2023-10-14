@@ -1,4 +1,4 @@
 package com.library.librarymanagementsystem.Enum;
 
-public class Enum {
+public enum ROLE {
 }

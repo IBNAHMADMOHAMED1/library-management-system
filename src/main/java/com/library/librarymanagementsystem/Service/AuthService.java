@@ -1,4 +1,8 @@
 package com.library.librarymanagementsystem.Service;
 
-public class AuthService {
+import com.library.librarymanagementsystem.Dto.LoginRequestDto;
+
+public interface AuthService {
+    public String login(LoginRequestDto loginRequest);
 }
+
