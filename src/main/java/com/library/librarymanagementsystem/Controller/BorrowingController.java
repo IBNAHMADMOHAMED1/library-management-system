@@ -29,29 +29,27 @@ public class BorrowingController {
     public ResponseEntity<APIResponse<?>> borrowBook(@PathVariable Long id){
         try {
             BookDto bookDto = borrowingService.borrowBook(id, 1L);
-            ResponseEntity.status(HttpStatus.OK).body(
+           return  ResponseEntity.status(HttpStatus.OK).body(
                     APIResponse.builder()
                             .status("success")
                             .result(bookDto)
                             .build()
             );
         } catch (BookNotFoundException e) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+           return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     APIResponse.builder()
                             .status("failed")
                             .errors(List.of(ErrorDto.builder().message(e.getMessage()).build()))
                             .build()
             );
         } catch (CanNotProcessBorrowingException e) {
-            ResponseEntity.status(HttpStatus.NOT_EXTENDED).body(
+          return   ResponseEntity.status(HttpStatus.NOT_EXTENDED).body(
                     APIResponse.builder()
                             .status("failed")
                             .errors(List.of(ErrorDto.builder().message(e.getMessage()).build()))
                             .build()
             );
         }
-        return ResponseEntity.ok().build();
-
     }
 
     @PostMapping("/{id}/return")
