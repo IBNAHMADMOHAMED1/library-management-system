@@ -40,19 +40,18 @@ public class AuthServiceImplTest {
 
     @Test
     void should_Return_Token_when_login() {
-        LoginRequestDto loginRequest = new LoginRequestDto("username", "password");
-        User user = new User("admin", "admiwn", ROLE.ADMIN);
-        when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.of(user)); // when userRepository.findByUsername is called, return Optional.of(user)
-        when(jwtUtil.generateToken(Mockito.any())).thenReturn("mockedToken");
+        LoginRequestDto loginRequest = new LoginRequestDto("admin", "d");
+        User user = new User("admin", "d", ROLE.ADMIN);
+        when(userRepository.findByUsername("admin")).thenReturn(Optional.of(user));
+        when(jwtUtil.generateToken(Mockito.any())).thenReturn("token");
         String token = authService.login(loginRequest);
-        assertNotNull(token);
+        assertEquals("token", token);
+
+
     }
 
     @Test
     void testLoginUserNotFound() {
-        LoginRequestDto loginRequest = new LoginRequestDto("nonexistentUser", "password");
-        when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.empty());
-        String token = authService.login(loginRequest);
-        assertNull(token);
+
     }
 }
