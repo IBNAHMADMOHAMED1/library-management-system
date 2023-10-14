@@ -45,7 +45,7 @@ class BorrowingServiceImplTest {
         when(bookRepository.isAvailable(1L)).thenReturn(true);
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
         when(bookTransactionRepository.countAllByUser(1L)).thenReturn(1L);
-        when(bookTransactionRepository.countAllByUser(2L)).thenReturn(2L);
+        when(bookTransactionRepository.countAllByUser(2L)).thenReturn(2L
         when(bookTransactionRepository.countAllByUser(3L)).thenReturn(3L);
     }
 
